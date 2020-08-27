@@ -49,16 +49,14 @@ def getSO(SENS_mode, fsky_mode, deproj_mode=0, planck_fsky=0.2):
                names=['ell', 'NlEE', 'NlBB'])
     datak = Table.read('data/WgMV/' + k_str, 
            format='ascii', names=['ell', 'Nlkk'])
-    
-#     print(datak)
-#     assert 1==0
+   
     
     l_max = 5000
     dataT = dataT[dataT['ell'] < l_max+1]
     dataE = dataE[dataE['ell'] < l_max+1]
     datak = datak[datak['ell'] < l_max+1]
     
-    primary = fishchips.experiments.CMB_Primary(theta_fwhm=1e8, sigma_T=1e8, sigma_P=1.4e8, f_sky=fsky, l_min=100, l_max=l_max)
+    primary = fishchips.experiments.CMB_Primary(theta_fwhm=[1e8], sigma_T=[1e8], sigma_P=[1.4e8], f_sky=fsky, l_min=100, l_max=l_max)
     lensing = fishchips.cmb_lensing.CMB_Lensing_Only(lens_beam=1e8, lens_f_sky=fsky, lens_noiseT=1.0e8,
                            lens_noiseP=1e8, lens_pellmax = 4000,lens_kmax = 3000)
     
